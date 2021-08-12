@@ -1,0 +1,8 @@
+<form action="{% url 'movies:update' movie.id%}" method="post">
+{% csrf_token %}
+  <label for="title">Title: </label>
+  <input id="title" type="text" name="title" value="{{ movie.title }}">
+  <input type="submit" value="Update">
+
+
+</form>
