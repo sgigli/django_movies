@@ -1,5 +1,9 @@
-<form action="{% url 'movies:create' %}" method="post">
-  {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+{% extends 'movies/base.html' %}
+
+{% block page_content %}
+  <form action="{% url 'movies:create' %}" method="post">
+    {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+  </form>
+{% endblock %}

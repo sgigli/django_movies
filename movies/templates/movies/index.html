@@ -1,7 +1,10 @@
-<ul>
-  {% for movie in movie_list %}
-    <li><a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a></li>
-  {% endfor %}
-</ul>
+{% extends 'movies/base.html' %}
 
-<a href="{% url 'movies:create' %}">Create</a>
+{% block page_content %}
+  <ul>
+    {% for movie in movie_list %}
+      <li><a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'movies:create' %}">Create</a>
+{% endblock %}

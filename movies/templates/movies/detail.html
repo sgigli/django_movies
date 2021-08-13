@@ -1,8 +1,11 @@
-{{ movie.title }}
-<a href="{% url 'movies:edit' movie.id %}" >Edit</a>
-<form action="{% url 'movies:delete' movie.id%}" method="post">
-{% csrf_token %}
-  <input type="submit" value="Delete">
-</form>
-<a href="{% url 'movies:index' %}">All movies</a>
+{% extends 'movies/base.html' %}
 
+{% block page_content %}
+  {{ movie.title }}
+  <a href="{% url 'movies:edit' movie.id %}" >Edit</a>
+  <form action="{% url 'movies:delete' movie.id%}" method="post">
+  {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+  <a href="{% url 'movies:index' %}">All movies</a>
+{% endblock %}
