@@ -1,6 +1,6 @@
 <ul>
-  {% for movie in movies %}
-    <li><a href="{% url 'movies:show' movie.id %}">{{ movie.title }}</a></li>
+  {% for movie in movie_list %}
+    <li><a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a></li>
   {% endfor %}
 </ul>
 

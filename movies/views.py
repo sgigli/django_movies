@@ -1,38 +1,37 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views import generic
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .models import Movie
 from .forms import MovieForm
 
-def index(request):
-  movies = Movie.objects.all()
-  context = {
-    "movies": movies
-  }
-  return render(request, "movies/index.html", context)
+class IndexView(generic.ListView):
+  model = Movie
+  template_name = "movies/index.html"
 
-def show(request, movie_id):
-  movie = get_object_or_404(Movie, pk=movie_id)
-  return render(request, "movies/show.html", { 'movie': movie })
+class DetailView(generic.DetailView):
+  model = Movie
+  template_name = "movies/detail.html"
 
-def create(request):
-  form = MovieForm(request.POST or None)
-  if form.is_valid():
-    movie = form.save()
-    return HttpResponseRedirect(reverse('movies:show', args=(movie.id,)))
-  return render(request, "movies/create.html", { 'form': form })
+class CreateView(CreateView):
+  model = Movie
+  fields = ["title"]
+  template_name = "movies/create.html"
+  
+  def get_success_url(self):
+    return reverse('movies:detail', kwargs={'pk': self.object.pk})
 
-def edit(request, movie_id):
-  movie = get_object_or_404(Movie, pk=movie_id)
-  form = MovieForm(request.POST or None, instance=movie)
-  if form.is_valid():
-    form.save()
-    return HttpResponseRedirect(reverse('movies:show', args=(movie_id,)))
-  return render(request, "movies/edit.html", { 'movie': movie, 'form': form })
+class UpdateView(UpdateView):
+  model = Movie
+  fields = ["title"]
+  template_name = "movies/edit.html"
 
-def delete(request, movie_id):
-  movie = get_object_or_404(Movie, pk=movie_id)
-  movie.delete()
-  return HttpResponseRedirect(reverse('movies:index'))
+  def get_success_url(self):
+    return reverse('movies:detail', kwargs={'pk': self.object.pk})
+
+class DeleteView(DeleteView):
+  model = Movie
+  success_url = reverse_lazy("movies:index")
 
