@@ -3,7 +3,7 @@
 {% block page_content %}
   <form action="{% url 'movies:edit' movie.id%}" method="post">
   {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="submit" value="Submit">
   </form>
 {% endblock %}

@@ -11,6 +11,14 @@
 <body>
   <header>
     <h1>Movies</h1>
+    {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+      <p><a href="{% url 'users:logout' %}">Log Out</a></p>
+    {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'users:login' %}">Log In</a>
+      <a href="{% url 'users:signup' %}">Sign Up</a>
+    {% endif %}
   </header>
   <div id="page_content" class="container">
     {% block page_content %}{% endblock %}
