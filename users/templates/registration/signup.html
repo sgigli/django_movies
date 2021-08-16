@@ -1,21 +1,28 @@
-<form method="post" action="{% url 'users:signup' %}">
-  {% csrf_token %}
-  {{ form.username.errors }}
-  {{ form.password1.errors }}
-  {{ form.password2.errors }}
-  <table>
-    <tr>
-      <td>{{ form.username.label_tag }}</td>
-      <td>{{ form.username }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.password1.label_tag }}</td>
-      <td>{{ form.password1 }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.password2.label_tag }}</td>
-      <td>{{ form.password2 }}</td>
-    </tr>
-  </table>
-  <input type="submit" value="Signup" />
-</form>
+{% extends 'movies/base.html' %}
+
+{% block page_content %}
+  <div class="d-flex justify-content-center">
+    <form method="post" action="{% url 'users:signup' %}">
+      {% csrf_token %}
+      {{ form.username.errors }}
+      {{ form.password1.errors }}
+      {{ form.password2.errors }}
+      <h2>Sign Up</h2>
+      <table>
+        <tr>
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password1.label_tag }}</td>
+          <td>{{ form.password1 }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password2.label_tag }}</td>
+          <td>{{ form.password2 }}</td>
+        </tr>
+      </table>
+      <input type="submit" value="Signup" />
+    </form>
+  </div>
+{% endblock %}
