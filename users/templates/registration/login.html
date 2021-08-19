@@ -1,10 +1,16 @@
 {% extends 'movies/base.html' %}
 
 {% block page_content %}
-  <div class="d-flex justify-content-center">
-    <form class="d-block" method="post" action="{% url 'users:login' %}">
+  {% for error in form.non_field_errors %}
+    <div class="alert alert-danger position-absolute top-20 start-0 w-100" role="alert">
+      {{ error }}
+    </div>
+  {% endfor %}
+
+  <div class="fill-rest-of-screen-height d-flex justify-content-center align-items-center">
+    <form class="bg-warning card p-5" method="post" action="{% url 'users:login' %}">
       {% csrf_token %}
-      <h2 class="d-block">Log In</h2>
+      <h2 class="text-center">Log In</h2>
       <table>
         <tr>
           <td>{{ form.username.label_tag }}</td>
@@ -15,7 +21,7 @@
           <td>{{ form.password }}</td>
         </tr>
       </table>
-      <input type="submit" value="login" />
+      <input class="btn btn-primary" type="submit" value="Login" />
     </form>
   </div>
 {% endblock %}

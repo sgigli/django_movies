@@ -1,12 +1,23 @@
 {% extends 'movies/base.html' %}
 
 {% block page_content %}
-  <div class="d-flex justify-content-center">
-    <form method="post" action="{% url 'users:signup' %}">
+  {% if form.username.errors or form.password1.errors or form.password2.errors %}
+    <ul class="alert alert-danger position-absolute top-20 start-0 w-100" role="alert">
+      {% for error in form.username.errors %}
+        <li class="ms-4">{{ error }}</li>
+      {% endfor %}
+      {% for error in form.password1.errors %}
+        <li class="ms-4">{{ error }}</li>
+      {% endfor %}
+      {% for error in form.password2.errors %}
+        <li class="ms-4">{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div class="fill-rest-of-screen-height d-flex justify-content-center align-items-center">
+    <form class="bg-warning card p-5" method="post" action="{% url 'users:signup' %}">
       {% csrf_token %}
-      {{ form.username.errors }}
-      {{ form.password1.errors }}
-      {{ form.password2.errors }}
       <h2>Sign Up</h2>
       <table>
         <tr>
@@ -22,7 +33,7 @@
           <td>{{ form.password2 }}</td>
         </tr>
       </table>
-      <input type="submit" value="Signup" />
+      <input class="btn btn-primary" type="submit" value="Signup" />
     </form>
   </div>
 {% endblock %}
