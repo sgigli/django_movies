@@ -1,10 +1,11 @@
 {% extends 'movies/base.html' %}
 
 {% block page_content %}
-  <ul>
-    {% for movie in movie_list %}
-      <li><a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a></li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'movies:create' %}">Create</a>
+  <a class="btn btn-primary mt-5" href="{% url 'movies:create' %}">Add Movie</a>
+
+  {% for movie in movie_list %}
+    <div class="card w-25 my-3">
+      <a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a>
+    </div>
+  {% endfor %}
 {% endblock %}

@@ -1,11 +1,12 @@
 {% extends 'movies/base.html' %}
 
 {% block page_content %}
-  {{ movie.title }}
-  <a href="{% url 'movies:edit' movie.id %}" >Edit</a>
-  <form action="{% url 'movies:delete' movie.id%}" method="post">
+  <a class="pt-5" href="{% url 'movies:index' %}">All movies</a>
+
+  <h2 class="mt-4">{{ movie.title }}</h2>
+  <a class="btn btn-warning" href="{% url 'movies:edit' movie.id %}" >Edit</a>
+  <form class="d-inline" action="{% url 'movies:delete' movie.id%}" method="post">
   {% csrf_token %}
-    <input type="submit" value="Delete">
+    <input class="btn btn-danger" type="submit" value="Delete">
   </form>
-  <a href="{% url 'movies:index' %}">All movies</a>
 {% endblock %}
