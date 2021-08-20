@@ -4,9 +4,12 @@
   <a class="pt-5" href="{% url 'movies:index' %}">All movies</a>
 
   <h2 class="mt-4">{{ movie.title }}</h2>
-  <a class="btn btn-warning" href="{% url 'movies:edit' movie.id %}" >Edit</a>
-  <form class="d-inline" action="{% url 'movies:delete' movie.id%}" method="post">
-  {% csrf_token %}
-    <input class="btn btn-danger" type="submit" value="Delete">
-  </form>
+  <img src="{{movie.image.url}}" width="200px" />
+  <div>
+    <a class="btn btn-warning" href="{% url 'movies:edit' movie.id %}" >Edit</a>
+    <form class="d-inline" action="{% url 'movies:delete' movie.id%}" method="post">
+    {% csrf_token %}
+      <input class="btn btn-danger" type="submit" value="Delete">
+    </form>
+  </div>
 {% endblock %}
