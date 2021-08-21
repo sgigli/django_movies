@@ -1,0 +1,16 @@
+{% extends 'movies/base.html' %}
+
+{% block page_content %}
+  {% if messages %}
+    {% for message in messages %}
+        <div class="text-center alert alert-{{ message.tags }}">
+            {{ message|safe }}
+        </div>
+    {% endfor %}
+  {% endif %}
+  <form action="{% url 'users:profile' user.id%}" method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
