@@ -21,7 +21,3 @@ class ProfileUpdateView(SuccessMessageMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('users:profile', kwargs={'pk': self.object.pk})
-
-def profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    return render(request, 'profile/detail.html', { 'user': user })
