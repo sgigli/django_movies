@@ -8,5 +8,6 @@ urlpatterns = [
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('create', views.CreateView.as_view(), name='create'),
     path('<int:pk>/edit', views.UpdateView.as_view(), name='edit'),
-    path('<int:pk>/delete', views.DeleteView.as_view(), name="delete")
+    path('<int:pk>/delete', views.DeleteView.as_view(), name="delete"),
+    path('secret', views.secretPage, name="secret")
 ]
